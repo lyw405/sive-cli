@@ -1,9 +1,21 @@
 {
-  "name": "sive-cli",
+  "name": "@lyw405/sive-cli",
   "version": "0.1.0",
   "description": "AntV Sive 命令行工具 —— 将 Sive 数据可视化能力集成到终端与 CI/CD 工作流",
   "type": "module",
   "license": "MIT",
+  "author": "liuyuwang",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lyw405/sive-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lyw405/sive-cli/issues"
+  },
+  "homepage": "https://github.com/lyw405/sive-cli#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "bin": {
     "sive": "./dist/index.js"
   },

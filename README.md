@@ -15,8 +15,8 @@
 ## 快速开始
 
 ```bash
-# 1. 安装（源码构建，要求 Node.js ≥ 18）
-npm install && npm run build && npm link
+# 1. 安装（要求 Node.js ≥ 18）
+npm install -g @lyw405/sive-cli
 
 # 2. 登录（API Key 在 Sive「个人设置 → API Token」创建）
 sive login
@@ -29,13 +29,17 @@ sive chart column -d '[{"category":"华东","value":120},{"category":"华南","v
 
 ## 安装
 
-尚未发布到 npm，从源码构建并全局注册：
+```bash
+npm install -g @lyw405/sive-cli
+sive --help
+```
+
+参与开发时从源码构建并全局注册：
 
 ```bash
 npm install
 npm run build
-npm link          # 全局注册 sive 命令
-sive --help
+npm link
 ```
 
 ## 配置
@@ -151,10 +155,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Install Sive CLI（源码构建，尚未发布 npm）
-        run: |
-          git clone <本仓库地址> sive-cli
-          cd sive-cli && npm ci && npm run build && npm link
+      - name: Install Sive CLI
+        run: npm install -g @lyw405/sive-cli
       - name: Generate weekly chart
         env:
           SIVE_API_KEY: ${{ secrets.SIVE_API_KEY }}

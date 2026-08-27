@@ -97,14 +97,16 @@ sive query <datasetId> "SELECT * FROM data LIMIT 10" --json   # JSON 输出，�
 ### `sive ask <prompt>` —— 自然语言生成数据应用
 
 ```bash
-sive ask "分析各区域销售趋势并给出建议"                 # 数据报告（默认）
-sive ask "按月汇总销售额绘制折线图" --type chart        # 数据单图
+# <datasetId> 为 upload 返回的 Dataset ID（平台只认 ID，写数据集名称无法自动关联）
+sive ask "基于数据集 <datasetId>（表名 data），分析各区域销售趋势并给出建议"   # 数据报告（默认）
+sive ask "基于数据集 <datasetId>（表名 data），按月汇总销售额绘制折线图" --type chart   # 数据单图
 sive ask "..." --timeout 900                            # 自定义超时（秒，默认 600）
 ```
 
 - 提交后自动轮询生成状态（`not_started → streaming → finished`，每 3 秒一次），完成打印预览地址
+- 预览地址是应用的 AI 对话工作台；`finished` 仅表示应用已生成响应，若 AI 认为上下文不足会在页面内追问（如索要 Dataset ID），不代表图表已画出
 - 报告类应用通常需要几分钟，超时不会丢失任务，用 `sive status <appId>` 复查
-- `ask` 只向平台提交应用类型与 Prompt（不带数据集参数），分析哪份数据由平台基于 Prompt 内容理解，建议在 Prompt 中写明数据上下文（数据集、表名、字段等）
+- `ask` 只向平台提交应用类型与 Prompt（不带数据集参数）。实测平台 AI 只认 **Dataset ID**（或直接粘贴的数据内容），仅写数据集名称无法自动关联；建议把 `upload` 返回的 ID 写进 Prompt，如 `sive ask "基于数据集 <datasetId>（表名 data）…"`，也可在预览页绑定数据集后继续对话
 
 ### `sive status <appId>` —— 查询生成状态
 
@@ -207,3 +209,5 @@ npm run format      # Prettier
 - Excel 数据集的表名/列名规则见上文「导入后的表名规则」
 - 接口响应统一包裹在 `data` 字段；`excute-sql` 的业务错误在顶层 `error` 字段；`vis/generate` 失败返回 400 + `message`
 - `sive login --key` 会把 Key 写入 shell 历史，交互式场景建议使用不带 `--key` 的交互式登录
+- `ask` 的 Prompt 中数据集名称无法自动绑定数据，需写 Dataset ID 或在预览页绑定（实测结论，官方文档未记载）
+- `vis/generate` 返回图片的实际分辨率为请求尺寸的 3 倍（默认 600×400 → 实际 1800×1200）（实测结论）

@@ -1,0 +1,48 @@
+{
+  "name": "sive-cli",
+  "version": "0.1.0",
+  "description": "AntV Sive 命令行工具 —— 将 Sive 数据可视化能力集成到终端与 CI/CD 工作流",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "sive": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src",
+    "format": "prettier --write ."
+  },
+  "keywords": [
+    "sive",
+    "antv",
+    "cli",
+    "data-visualization",
+    "ai"
+  ],
+  "dependencies": {
+    "axios": "^1.7.9",
+    "chalk": "^5.4.1",
+    "cli-table3": "^0.6.5",
+    "commander": "^12.1.0",
+    "form-data": "^4.0.1",
+    "inquirer": "^12.3.0",
+    "ora": "^8.1.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/node": "^22.10.2",
+    "eslint": "^9.17.0",
+    "prettier": "^3.4.2",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.2"
+  }
+}
